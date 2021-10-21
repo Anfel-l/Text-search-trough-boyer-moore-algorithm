@@ -40,12 +40,8 @@ def boyer_moore(cadena, patron):
     '''
     
     coincidencias = []
-    nueva_cadena=[]
-    cadeana_copy=cadena[:]
-    aux_cadena=[]
-
-
-    aux_list=[]
+    
+    
     
     x=len(patron)
     y=len(cadena)
@@ -72,25 +68,42 @@ def boyer_moore(cadena, patron):
     
 
     
+    
+    
+
+    return coincidencias
+
+def select(cadena, patron, coincidencias=[]):
+
+    nueva_cadena=[]
+    
+    aux_cadena=[]
+
+
+    aux_list=[]
+
     aux_list.append(coincidencias)
     aux_char=len(patron)
     aux_cadena.append(cadena)
-
+    cadeana_copy=aux_cadena[:]
     
+
+    print(aux_list)
     
     aux_index2=0
     for itm in aux_list:
         for itm2 in itm:
             if itm.index(itm2) != 0:
 
-                itm2 += len(cadena[aux_index2]) - len(cadeana_copy[aux_index2])
+                itm2 += len(aux_cadena[aux_index2]) - len(cadeana_copy[aux_index2])
             
-            aux_cadena[aux_index2] = aux_cadena[aux_index2][0:itm2] + "\033[;31m" + aux_cadena[aux_index2][itm2:(itm2 + aux_char)] + "\033[0;m" + aux_cadena[aux_index2][(itm2 + aux_char):]
-            nueva_cadena.append(aux_cadena[aux_index2])
-            aux_index2 += 2
-    
+            aux_cadena[aux_index2] = aux_cadena[aux_index2][0:itm2] + "[" + aux_cadena[aux_index2][itm2:(itm2 + aux_char)] + "]" + aux_cadena[aux_index2][(itm2 + aux_char):]
+        nueva_cadena.append(aux_cadena[aux_index2])
+        aux_index2 += 1
 
     return nueva_cadena
+
+
 
 
 def switch():
@@ -117,14 +130,14 @@ def switch():
         aux1 = input(str("Introduce cadena madre: "))
         aux2 = input(str("Introduce el patrón: "))
 
-        print(boyer_moore(aux1, aux2))
+        print(select(aux1, aux2, boyer_moore(aux1, aux2)))
     elif op == 2:
         aux1 = input(str("Introduce fichero: "))
         aux2 = input(str("Introduce patron: "))
         
         cadena = str(file_read(aux1, "r"))
 
-        print(boyer_moore(cadena, aux2))
+        print(select(cadena, aux2, boyer_moore(aux1, aux2)))
 
     
 
