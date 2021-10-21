@@ -64,13 +64,6 @@ def boyer_moore(cadena, patron):
         else:
             aux_indexP += max(1, aux_index-bad_prefix[ord(cadena[aux_indexP+aux_index])])
         
-
-    
-
-    
-    
-    
-
     return coincidencias
 
 def select(cadena, patron, coincidencias=[]):
@@ -88,7 +81,7 @@ def select(cadena, patron, coincidencias=[]):
     cadeana_copy=aux_cadena[:]
     
 
-    print(aux_list)
+    
     
     aux_index2=0
     for itm in aux_list:
@@ -135,9 +128,9 @@ def switch():
         aux1 = input(str("Introduce fichero: "))
         aux2 = input(str("Introduce patron: "))
         
-        cadena = str(file_read(aux1, "r"))
+        cadena = str(file_read(aux1))
 
-        print(select(cadena, aux2, boyer_moore(aux1, aux2)))
+        print(select(cadena, aux2, boyer_moore(cadena, aux2)))
 
     
 
