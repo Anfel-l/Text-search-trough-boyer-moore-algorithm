@@ -40,6 +40,13 @@ def boyer_moore(cadena, patron):
     '''
     
     coincidencias = []
+    nueva_cadena=[]
+    cadeana_copy=cadena[:]
+    aux_cadena=[]
+
+
+    aux_list=[]
+    
     x=len(patron)
     y=len(cadena)
 
@@ -63,7 +70,27 @@ def boyer_moore(cadena, patron):
         
 
     
-    return coincidencias
+
+    
+    aux_list.append(coincidencias)
+    aux_char=len(patron)
+    aux_cadena.append(cadena)
+
+    
+    
+    aux_index2=0
+    for itm in aux_list:
+        for itm2 in itm:
+            if itm.index(itm2) != 0:
+
+                itm2 += len(cadena[aux_index2]) - len(cadeana_copy[aux_index2])
+            
+            aux_cadena[aux_index2] = aux_cadena[aux_index2][0:itm2] + "\033[;31m" + aux_cadena[aux_index2][itm2:(itm2 + aux_char)] + "\033[0;m" + aux_cadena[aux_index2][(itm2 + aux_char):]
+            nueva_cadena.append(aux_cadena[aux_index2])
+            aux_index2 += 2
+    
+
+    return nueva_cadena
 
 
 def switch():
